@@ -1,0 +1,17 @@
+{
+  "name": "the-allin-family-dynamic-adverts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "build": "node scripts/check-syntax.js",
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "5.3.0"
+  }
+}
