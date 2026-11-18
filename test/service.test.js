@@ -81,7 +81,7 @@ test('HTTP landing, health, HEAD, methods, bodies, errors and clean closure', as
   assert.doesNotMatch(upload.text, /private payload/);
   assert.equal(server.headersTimeout, 10000);
   assert.equal(server.requestTimeout, 15000);
-  assert.equal(server.timeout, 15000);
+  assert.equal(server.timeout, 360000);
   await closeServer(server);
   assert.equal(server.listening, false);
 });

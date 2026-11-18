@@ -1,5 +1,5 @@
 import { readConfig } from './config/server-config.js';
-import { createServiceServer, closeServer } from './server/http-server.js';
+import { createServiceServer, createShutdownHandler } from './server/http-server.js';
 
 let config;
 try {
@@ -11,18 +11,7 @@ try {
 
 if (config) {
   const server = createServiceServer();
-  let stopping = false;
-  const shutdown = async () => {
-    if (stopping) return;
-    stopping = true;
-    console.log('Stopping Dynamic Adverts.');
-    try {
-      await closeServer(server);
-    } catch {
-      console.error('Server did not shut down cleanly.');
-      process.exitCode = 1;
-    }
-  };
+  const shutdown = createShutdownHandler(server);
   process.once('SIGTERM', shutdown);
   process.once('SIGINT', shutdown);
   server.on('error', () => {
